@@ -1,6 +1,6 @@
 import flask
 import os
-from flask import jsonify
+from flask import jsonify, request
 import numpy as np
 import random
 import json
@@ -12,9 +12,11 @@ from predict import *
 from SortDataByPrice import *
 from CropRotation import *
 from CropRecommendation import *
+from flask_cors import CORS
 
 app = flask.Flask(__name__)
 app.debug = True
+CORS(app, origins=["http://localhost:3000", "https://shehryarusman.github.io/FarmerPro"])
 
 @app.route('/')
 def index():
@@ -28,8 +30,11 @@ def get_posts():
         json_data = json.load(json_file)
     return jsonify(json_data)
 
-@app.route('/predict', methods=['GET'])
-def predict(lat=33.44193097647909,lang=-112.07110698105588):
+@app.route('/predict', methods=['GET', 'OPTIONS'])
+def predict():
+    lat = float(request.args.get('latitude', 33.44193097647909))
+    lang = float(request.args.get('longitude', -112.07110698105588))
+    print(lat,lang)
     temperature, precipitation = collect_weather(lat, lang)
     Ph =  pH_of_soil()
     humidity = get_humidity(lat, lang)
