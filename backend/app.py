@@ -1,101 +1,22 @@
 import flask
 from flask import jsonify
-from flask import request
-import requests
-import os
-import flask_sqlalchemy
-import flask_praetorian
-import flask_cors
 import pandas as pd
 import numpy as np
 import random
-import pickle
 import json
-import tensorflow as tf
-from tensorflow import keras
-from PIL import Image
+from Climate import *
+import random
+import numpy as np
+from humidity import *
+from predict import *
+from SortDataByPrice import *
+from CropRotation import *
+from CropRecommendation import *
 
-db = flask_sqlalchemy.SQLAlchemy()
-guard = flask_praetorian.Praetorian()
-cors = flask_cors.CORS()
-
-
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.Text, unique=True)
-    password = db.Column(db.Text)
-    roles = db.Column(db.Text)
-    is_active = db.Column(db.Boolean, default=True, server_default='true')
-
-    @property
-    def rolenames(self):
-        try:
-            return self.roles.split(',')
-        except Exception:
-            return []
-
-    @classmethod
-    def lookup(cls, username):
-        return cls.query.filter_by(username=username).one_or_none()
-
-    @classmethod
-    def identify(cls, id):
-        return cls.query.get(id)
-
-    @property
-    def identity(self):
-        return self.id
-
-    def is_valid(self):
-        return self.is_active
 
 
 app = flask.Flask(__name__)
 app.debug = True
-app.config['SECRET_KEY'] = 'top secret'
-app.config['JWT_ACCESS_LIFESPAN'] = {'hours': 24}
-app.config['JWT_REFRESH_LIFESPAN'] = {'days': 30}
-
-guard.init_app(app, User)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
-db.init_app(app)
-
-cors.init_app(app)
-
-with app.app_context():
-    db.create_all()
-    if db.session.query(User).filter_by(username='admin').count() < 1:
-        db.session.add(User(
-          username='admin',
-          password=guard.hash_password('admin'),
-          roles='admin'
-            ))
-    db.session.commit()
-
-@app.route('/api/login', methods=['POST'])
-def login():
-    req = flask.request.get_json(force=True)
-    username = req.get('username', None)
-    password = req.get('password', None)
-    user = guard.authenticate(username, password)
-    ret = {'access_token': guard.encode_jwt_token(user)}
-    return ret, 200
-
-  
-@app.route('/api/refresh', methods=['POST'])
-def refresh():
-    print("refresh request")
-    old_token = flask.request.get_data()
-    new_token = guard.refresh_jwt_token(old_token)
-    ret = {'access_token': new_token}
-    return ret, 200
-  
-  
-@app.route('/api/protected')
-@flask_praetorian.auth_required
-def protected():
-    return {'message': f'protected endpoint (allowed user {flask_praetorian.current_user().username})'}
 
 @app.route('/')
 def index():
@@ -115,54 +36,6 @@ def getDailyTemps(id):
     #print(temps)
     return temps[str(id)] 
 
-def getLocalX_test(id, zipcode):
-    X = []
-    poverty = pd.read_csv("datasets/Philadelphia-CensusZipCodeTabulationArea.csv")["Value:Count_Person_BelowPovertyLevelInThePast12Months"][id]
-    for i in range(0, 365):
-        X.append(expected(i, poverty))
-    for t in getDailyTemps(id):
-        X.append(t)
-    X.pop()
-    X.append(poverty)
-    X.append(zipcode)
-    #print(len(X), X)
-    return np.array(X)
-
-@app.route('/centers', methods=['GET'])
-def mlbackend():
-    print("running ml backend")
-    model = pickle.load(open("TodayNeedPredictor.sav", "rb"))
-    i=0
-    response = {}
-    lat=""
-    longitude=""
-    data = pd.read_csv('datasets/cleaned_data.csv')
-    currentId = ""
-    for latlon in data["LatLon"]:
-        currentId = i
-        lat = latlon.split(',')[1]
-        longitude = latlon.split(',')[0]
-        hours=""
-        if data["Time: Open"][i] == "Contact for Hours":
-            hours = "Contact for Hours"
-        else:
-            hours = data["Time: Open"][i] + "-" + data["Time: Close"][i]
-        
-        need = int(model.predict(getLocalX_test(currentId, data["Zip Code"][i]).reshape(1, -1))[0]) - random.randint(0,40)
-        if(i == 0):
-            response[i]= json.load(open("center1.json", "r"))["0"]
-        else:
-            response[i]= {"lat": lat, 
-                    "long": longitude, 
-                    "need": need,
-                    "stock": random.randint(0,50),
-                    "name": data["Organization Name"][i], 
-                    "address": data["Address"][i], 
-                    "hours": hours,
-                    "phone": data["Phone Number"][i]}
-        i+=1
-
-    return jsonify(response)
 
 @app.route('/news', methods = ['GET'])
 def get_posts():
@@ -191,6 +64,34 @@ def save_canvas():
 @app.route('/model')
 def export_model():
     return json.load('\backend\model\model.json')
+
+@app.route('/api/predict', methods=['GET'])
+def predict(lat=33.44193097647909,lang=-112.07110698105588):
+    temperature, precipitation = collect_weather(lat, lang)
+    Ph =  pH_of_soil()
+    humidity = get_humidity(lat, lang)
+    commodities = predict_crop(temperature, humidity, Ph, precipitation)
+    print(commodities)
+    prices = control(lat, lang, commodities)
+    print(prices)
+    keys = list(prices.keys())
+    values = list(prices.values())
+    sorted_value_index = np.argsort(values)
+    sorted_dict = {keys[i]: values[i] for i in sorted_value_index}
+    print(sorted_dict)
+
+    output_json = {}
+    output_json["rotationTxt"] = main_rotation(list(sorted_dict.keys()))
+    print(output_json["rotationTxt"])
+    add_data = main_howto(sorted_dict)
+    print(add_data)
+    output_json["cropSpecific"] = add_data
+
+    return output_json
+
+def pH_of_soil():
+    return random.choice(np.arange(4.5, 8.5, 0.007)) 
+
 
 if __name__ == '__main__':
     app.run()
