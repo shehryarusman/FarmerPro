@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import "../Article.css";
+import NewsVid from "../newsbg.mp4";
 
 // Import the JSON data
 import jsonData from "../news.json"; // Replace with the correct path to your JSON file
@@ -27,7 +28,10 @@ const Article = () => {
   }, [fetchNews]);
 
   return (
-    <div>
+    <div className="article-container">
+      <video muted autoPlay loop playsInline className="newsVid">
+        <source src={NewsVid} type="video/mp4" />
+      </video>
       <h1 className="heading">Recent News</h1>
       <section className="articles">
         {news.map((article) => (
