@@ -1,4 +1,5 @@
 import flask
+import os
 from flask import jsonify
 import numpy as np
 import random
@@ -21,16 +22,13 @@ def index():
 
 @app.route('/news', methods = ['GET'])
 def get_posts():
-    with open("news.json", "r") as json_file:
+    file = "news.json"
+    directory = "backend"
+    with open(os.path.join(directory, file), "r") as json_file:
         json_data = json.load(json_file)
     return jsonify(json_data)
 
-
-@app.route('/model')
-def export_model():
-    return json.load('\backend\model\model.json')
-
-@app.route('/api/predict', methods=['GET'])
+@app.route('/predict', methods=['GET'])
 def predict(lat=33.44193097647909,lang=-112.07110698105588):
     temperature, precipitation = collect_weather(lat, lang)
     Ph =  pH_of_soil()
