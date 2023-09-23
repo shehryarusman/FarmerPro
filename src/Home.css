@@ -1,0 +1,165 @@
+.home {
+  position: relative;
+  /* Add this */
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  z-index: 1;
+  /* Add this to position content above the video */
+}
+
+
+.background-video {
+  position: absolute;
+  float: right;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-left: 35%;
+  margin-top: 20%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+  opacity: 0.8;
+
+  /* Set a lower z-index value for the video */
+}
+
+
+.landing {
+  text-align: center;
+  color: #000;
+  border: 1px solid black;
+  width: 35%;
+}
+
+.landing .name {
+  font-size: 70px;
+  margin-bottom: 10px;
+  /* Add margin for spacing */
+}
+
+.landing .copy {
+  font-size: 24px;
+  font-weight: 500;
+  padding: 2rem 2rem;
+  text-align: justify;
+}
+
+.globe {
+  width: 150px;
+  height: 150px;
+  background-image: url("./globe.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  margin: 0 auto;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes wiggle {
+  0% {
+    -webkit-transform: skewX(9deg);
+  }
+
+  10% {
+    -webkit-transform: skewX(-8deg);
+  }
+
+  20% {
+    -webkit-transform: skewX(7deg);
+  }
+
+  30% {
+    -webkit-transform: skewX(-6deg);
+  }
+
+  40% {
+    -webkit-transform: skewX(5deg);
+  }
+
+  50% {
+    -webkit-transform: skewX(-4deg);
+  }
+
+  60% {
+    -webkit-transform: skewX(3deg);
+  }
+
+  70% {
+    -webkit-transform: skewX(-2deg);
+  }
+
+  80% {
+    -webkit-transform: skewX(1deg);
+  }
+
+  90% {
+    -webkit-transform: skewX(0deg);
+  }
+
+  100% {
+    -webkit-transform: skewX(0deg);
+  }
+}
+
+@keyframes wiggle {
+  0% {
+    transform: skewX(9deg);
+  }
+
+  10% {
+    transform: skewX(-8deg);
+  }
+
+  20% {
+    transform: skewX(7deg);
+  }
+
+  30% {
+    transform: skewX(-6deg);
+  }
+
+  40% {
+    transform: skewX(5deg);
+  }
+
+  50% {
+    transform: skewX(-4deg);
+  }
+
+  60% {
+    transform: skewX(3deg);
+  }
+
+  70% {
+    transform: skewX(-2deg);
+  }
+
+  80% {
+    transform: skewX(1deg);
+  }
+
+  90% {
+    transform: skewX(0deg);
+  }
+
+  100% {
+    transform: skewX(0deg);
+  }
+}
+
+.wiggle {
+  -webkit-animation-name: wiggle;
+  animation-name: wiggle;
+  -webkit-animation-timing-function: ease-in;
+  animation-timing-function: ease-in;
+}
+
+.animated.wiggle {
+  -webkit-animation-duration: 0.75s;
+  animation-duration: 0.75s;
+}

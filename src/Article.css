@@ -1,0 +1,33 @@
+.heading {
+  margin-top: 7rem;
+  text-align: center;
+  color: #154631;
+}
+
+.articles {
+  margin: 1.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.article {
+  width: 80%;
+  height: auto !important;
+  border-radius: 10px;
+  border: 1px solid black;
+  display: flex;
+}
+
+.image {
+  width: 30%;
+  border-right: 1px solid black;
+  padding: 1rem 1rem;
+}
+
+.content {
+  width: 70%;
+  padding: 1rem 1rem;
+  display: grid;
+}

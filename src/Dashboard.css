@@ -1,0 +1,30 @@
+.heading {
+    margin-top: 7rem;
+    text-align: center;
+    color: #154631;
+}
+
+.dashboard {
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.map {
+    width: 65%;
+    height: 70vh;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 2rem;
+}
+
+.results {
+    width: 20%;
+    height: 40vh;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 10px;
+}
