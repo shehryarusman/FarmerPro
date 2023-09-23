@@ -40,7 +40,7 @@ def summariser(url):
 def newsparser():
     url = "https://newsapi.org/v2/everything?"
     parameters = {
-        'q' : "recycling OR reduce OR reuse OR repurpose OR upcycle OR compost OR sustainability OR waste management OR circular economy OR green living OR zero waste OR eco-friendly OR environmentally friendly OR recyclable OR biodegradable OR landfill diversion",
+        'q': 'organic farming OR permaculture OR agroforestry OR crop rotation OR soil health OR regenerative agriculture OR sustainable agriculture OR no-till farming OR cover crops OR composting OR biodiversity OR eco-friendly farming OR low-impact agriculture',
         'pageSize' : '50',
         'apiKey' : key
     }
