@@ -1,5 +1,4 @@
 import "../Dashboard.css";
-import Webcam from "react-webcam";
 
 function Dashboard() {
     return (

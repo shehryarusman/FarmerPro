@@ -1,5 +1,5 @@
 import flask
-from flask import jsonify
+from flask import jsonify, request
 import pandas as pd
 import numpy as np
 import random
@@ -12,11 +12,15 @@ from predict import *
 from SortDataByPrice import *
 from CropRotation import *
 from CropRecommendation import *
-
-
+from get_firebase_image import download_first_image_in_folder
+from flask_cors import CORS
+import time
+import tensorflow as tf
+from tensorflow import keras
+import cv2
 
 app = flask.Flask(__name__)
-app.debug = True
+CORS(app)
 
 @app.route('/')
 def index():
@@ -61,10 +65,6 @@ def save_canvas():
     
     #jsonify({'modelTopology': model_json, 'weightsManifest': weights_manifest})
 
-@app.route('/model')
-def export_model():
-    return json.load('\backend\model\model.json')
-
 @app.route('/api/predict', methods=['GET'])
 def predict(lat=33.44193097647909,lang=-112.07110698105588):
     temperature, precipitation = collect_weather(lat, lang)
@@ -92,6 +92,23 @@ def predict(lat=33.44193097647909,lang=-112.07110698105588):
 def pH_of_soil():
     return random.choice(np.arange(4.5, 8.5, 0.007)) 
 
+def load_model(model_path: str):
+  model = tf.saved_model.load(model_path)
+  signatures = list(model.signatures.keys())
+  return model, signatures
 
+@app.route('/api/classifydisease', methods=['GET', 'POST'])
+def disease_classification():
+    doIClassify = dict(request.json)
+    print(doIClassify["runmodel"])
+    download_first_image_in_folder('plant-disease-classifier-4f4c8.appspot.com', 
+                'images/', 
+                'image.png')
+    time.sleep(1) #optional
+    load_model('model')
+
+    if doIClassify != None:
+        return doIClassify
+    
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import "./App.css";
 import MainPage from './component/MainPage';
 import SignUp from './component/SignUp'
@@ -10,7 +10,7 @@ import Nav from './component/Nav';
 import News from './component/Article';
 import ProductRecomendation from './component/ProductRecomendation';
 import LoginPage from './component/LoginPage';
-import RecylePage from './component/RecyclePage';
+import DiseaseClassifier from './component/DiseaseClassification';
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
           <Route path="/news" element={<News />} />
           <Route path="/home" element={<MainPage />} />
           <Route path="/product" element={<ProductRecomendation />} />
-          <Route path="/detect" element={<RecylePage/>}/>
+          <Route path="/detect" element={<DiseaseClassifier/>}/>
           <Route path="*" element={<ErrorPage />} />
         </Routes>
     </BrowserRouter>
