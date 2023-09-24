@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
-import "leaflet/dist/leaflet.css"; 
-import "../Dashboard.css"
-import markerIconPng from "leaflet/dist/images/marker-icon.png"
-import {Icon} from 'leaflet'
+import "leaflet/dist/leaflet.css";
+import "../Dashboard.css";
+import markerIconPng from "leaflet/dist/images/marker-icon.png";
+import { Icon } from "leaflet";
 
 function Dashboard() {
   // State to manage marker position
@@ -29,7 +29,7 @@ function Dashboard() {
       .then((response) => response.json())
       .then((data) => {
         console.log("API Response:", data);
-        console.log("success!")
+        console.log("success!");
       })
       .catch((error) => {
         // Handle error
@@ -56,12 +56,17 @@ function Dashboard() {
             <Marker
               position={markerPosition}
               draggable={true}
-              icon={new Icon({iconUrl: markerIconPng, iconSize: [25, 41], iconAnchor: [12, 41]})}
+              icon={
+                new Icon({
+                  iconUrl: markerIconPng,
+                  iconSize: [25, 41],
+                  iconAnchor: [12, 41],
+                })
+              }
               eventHandlers={{
                 dragend: handleMarkerMove,
               }}
-            >
-                </Marker>
+            ></Marker>
           </MapContainer>
         </div>
         <div className="results">

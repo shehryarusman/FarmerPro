@@ -1,70 +1,85 @@
+import React from "react";
 import "../About.css";
+import Mustafa from "../mustafa.jpg";
 
 function About() {
   return (
-    <div>
-      <div className="why">
-        <div className="sections">
-          <div className="section-1">
-            <h1>Our&nbsp;</h1>
+    <div className="our-team">
+      <h1 className="heading-about">Our Team</h1>
+      <div className="team">
+        <div className="profile">
+          <div className="profile-info">
+            <h1>Alex Zavalny</h1>
+            <p>Backend Engineer</p>
           </div>
-          <div className="section-2">
-            <h1>Why</h1>
+          <img src={Mustafa} alt="Profile Picture" />
+          <div className="description">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu
+              fermentum nunc, nec faucibus elit. Vestibulum quis massa ac ante
+              finibus pretium ut a nisl. Cras quis rutrum lacus. Pellentesque
+              nec finibus nulla, nec luctus leo. Vestibulum aliquet tincidunt
+              purus eget consequat. Nullam faucibus malesuada purus, in mollis
+              erat rutrum quis. In aliquam, velit id condimentum varius, risus
+              magna mattis nisl, vel pharetra mauris lectus et leo.
+            </p>
+          </div>
+        </div>
+        <div className="profile">
+          <div className="profile-info">
+            <h1>Mustafa Eren</h1>
+            <p>Frontend Engineer</p>
+          </div>
+          <img src={Mustafa} alt="Profile Picture" />
+          <div className="description">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu
+              fermentum nunc, nec faucibus elit. Vestibulum quis massa ac ante
+              finibus pretium ut a nisl. Cras quis rutrum lacus. Pellentesque
+              nec finibus nulla, nec luctus leo. Vestibulum aliquet tincidunt
+              purus eget consequat. Nullam faucibus malesuada purus, in mollis
+              erat rutrum quis. In aliquam, velit id condimentum varius, risus
+              magna mattis nisl, vel pharetra mauris lectus et leo.
+            </p>
+          </div>
+        </div>
+        <div className="profile">
+          <div className="profile-info">
+            <h1>Shehryar Usman</h1>
+            <p>Backend Engineer</p>
+          </div>
+          <img src={Mustafa} alt="Profile Picture" />
+          <div className="description">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu
+              fermentum nunc, nec faucibus elit. Vestibulum quis massa ac ante
+              finibus pretium ut a nisl. Cras quis rutrum lacus. Pellentesque
+              nec finibus nulla, nec luctus leo. Vestibulum aliquet tincidunt
+              purus eget consequat. Nullam faucibus malesuada purus, in mollis
+              erat rutrum quis. In aliquam, velit id condimentum varius, risus
+              magna mattis nisl, vel pharetra mauris lectus et leo.
+            </p>
+          </div>
+        </div>
+        <div className="profile">
+          <div className="profile-info">
+            <h1>Vatsal Jain</h1>
+            <p>Frontend Engineer</p>
+          </div>
+          <img src={Mustafa} alt="Profile Picture" />
+          <div className="description">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu
+              fermentum nunc, nec faucibus elit. Vestibulum quis massa ac ante
+              finibus pretium ut a nisl. Cras quis rutrum lacus. Pellentesque
+              nec finibus nulla, nec luctus leo. Vestibulum aliquet tincidunt
+              purus eget consequat. Nullam faucibus malesuada purus, in mollis
+              erat rutrum quis. In aliquam, velit id condimentum varius, risus
+              magna mattis nisl, vel pharetra mauris lectus et leo.
+            </p>
           </div>
         </div>
       </div>
-      <div class="container">
-        <div class="card">
-          <div class="face face1">
-            <div class="reason">
-              <span class="stars"></span>
-              <h2 class="java">Java</h2>
-              <p class="java">
-                Java is a class-based, object-oriented programming language that
-                is designed to have as few implementation dependencies as
-                possible.
-              </p>
-            </div>
-          </div>
-          <div class="face face2">
-            <h2>01</h2>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="face face1">
-            <div class="reason">
-              <span class="stars"></span>
-              <h2 class="python">Python</h2>
-              <p class="python">
-                Python is an interpreted, high-level and general-purpose
-                programming language.
-              </p>
-            </div>
-          </div>
-          <div class="face face2">
-            <h2>02</h2>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="face face1">
-            <div class="reason">
-              <span class="stars"></span>
-              <h2 class="cSharp">C#</h2>
-              <p class="cSharp">
-                C# is a general-purpose, multi-paradigm programming language
-                encompassing static typing, strong typing, lexically scoped and
-                component-oriented programming disciplines.
-              </p>
-            </div>
-          </div>
-          <div class="face face2">
-            <h2>03</h2>
-          </div>
-        </div>
-      </div>
-      <div className="footer">LMFAO</div>
     </div>
   );
 }

@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 
 import "../Home.css";
 import playVideo from "../vid2.mp4";
-import greenlandscape from "../green-landscape.jpeg";
-import Image4 from "../recycle-important.jpeg";
+import greenlandscape from "../heart.jpeg";
+import Image4 from "../enviromental_image_contact2.jpeg";
 
 function Home() {
   useEffect(() => {
@@ -37,21 +37,58 @@ function Home() {
         <div className="hero-content"></div>
       </section>
 
+      <section className="about animate-on-scroll">
+        <div className="about-inner">
+          <div className="about-image">
+            <img src={greenlandscape} alt="A person holding a recycling bin" />
+          </div>
+          <div className="about-text">
+            <h1>Crop Disease Prevention: Why is it Vital?</h1>
+            <p>
+              Agriculture is the backbone of our global food supply, and the
+              importance of crop disease prevention cannot be overstated. Crop
+              diseases caused by fungi, bacteria, and viruses pose a significant
+              threat to food security, potentially reducing yield and quality,
+              leading to substantial economic losses and increased food prices.
+              It is estimated that plant diseases cost the global economy over
+              $220 billion annually, losing 10-16% of the global harvest each
+              year. Effective disease management strategies, such as the
+              development of disease-resistant crop varieties, implementation of
+              biosecurity measures, and the judicious use of fungicides, are
+              crucial. These strategies protect farmers' livelihoods and play a
+              pivotal role in ensuring a stable and sustainable food supply for
+              the growing global population, which is projected to reach 9.7
+              billion by 2050. By prioritizing crop disease prevention, we can
+              mitigate the risk of food shortages, stabilize food prices, and
+              contribute to global food security and poverty reduction.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <section className="process animate-on-scroll">
         <div className="process-inner">
           <div className="process-text">
-            <h1> The Urgency of Proper Waste Management</h1>
+            <h1>Finding the Right Spot for the Right Crop.</h1>
             <p>
-              Waste management and recycling have become increasingly important
-              in recent years due to a growing waste crisis. According to the
-              World Bank, global waste generation is expected to reach 3.4
-              billion tonnes by 2050, up from 2.01 billion tonnes in 2016. In
-              the US, the Environmental Protection Agency estimates that
-              Americans generated 292.4 million tons of municipal solid waste
-              (MSW) in 2018, with only about 32% recycled or composted, and the
-              rest sent to landfills or incinerated. Proper waste management can
-              help reduce greenhouse gas emissions, conserve natural resources,
-              and protect human health and the environment.
+              Crop selection and soil suitability have emerged as pivotal
+              considerations in modern agriculture. With the Food and
+              Agriculture Organization (FAO) predicting a 50% surge in global
+              food demand by 2050, there's mounting pressure to adopt
+              sustainable farming practices. In the United States, where over
+              50% of crop losses are attributed to poor crop-soil compatibility,
+              the urgency of making well-informed crop choices is evident.
+              Selecting the right crop for a specific geographical location and
+              soil type enhances agricultural productivity, promoting higher
+              yields and reducing the need for chemical inputs, as studies by
+              the Soil Science Society of America have demonstrated, showing
+              potential reductions of up to 50% in synthetic fertilizer use.
+              This approach not only benefits the environment but also bolsters
+              food security, ensuring that crops are cultivated where they
+              thrive, thus meeting the needs of an ever-expanding global
+              population. In sum, it is a crucial element of sustainable
+              agriculture with profound implications for our planet's long-term
+              health and well-being.
             </p>
           </div>
           <div className="process-image">
@@ -60,49 +97,63 @@ function Home() {
         </div>
       </section>
 
-      <section className="about animate-on-scroll">
-        <div className="about-inner">
-          <div className="about-image">
+      <section className="process animate-on-scroll">
+        <div className="process-inner">
+          <div className="process-image">
             <img src={greenlandscape} alt="A person holding a recycling bin" />
           </div>
           <div className="about-text">
-            <h1>Our Mission: A Cleaner, Greener Future</h1>
+            <h1>Empowering Farmers for a Sustainable Future</h1>
             <p>
-              At our waste management project, we believe in protecting our
-              environment for future generations. That's why we're dedicated to
-              finding sustainable solutions for managing waste, reducing our
-              carbon footprint, and creating a cleaner, greener future.
+              At FarmerPro, we are on a mission to revolutionize agriculture and
+              empower farmers across the globe. We believe in harnessing the
+              power of data, artificial intelligence, and community
+              collaboration to create a more sustainable and environmentally
+              friendly future for farming. Our technology enables farmers to
+              scan their soil, analyze local weather conditions, and assess
+              plant health with precision, resulting in smarter crop choices.
+              Join us in our mission to cultivate a brighter future for
+              agriculture, one data-driven decision at a time.
             </p>
           </div>
         </div>
       </section>
 
       <section className="features animate-on-scroll">
-        <h1 className="feature-title">Our Process:</h1>
+        <h1 className="feature-title">Our Products:</h1>
         <div className="features-inner">
           <div className="feature-card">
             <i className="fas fa-recycle"></i>
-            <h2>Reduce</h2>
+            <h2>Croptimizer</h2>
             <p>
-              We work with local businesses and communities to reduce waste at
-              the source by encouraging the use of reusable products and
-              sustainable practices.
+              Explore optimal cultivation areas with our interactive map
+              feature, designed to assist farmers in identifying the most
+              suitable crops for their selected locations. By leveraging
+              advanced location analytics and comprehensive agricultural data,
+              this feature provides tailored recommendations, helping farmers
+              maximize yield and resource efficiency.
             </p>
           </div>
           <div className="feature-card">
             <i className="fas fa-handshake"></i>
-            <h2>Reuse</h2>
+            <h2>Disease Detector</h2>
             <p>
-              We promote the reuse of items whenever possible, such as through
-              donation and upcycling initiatives.
+              Detect and manage plant diseases effectively with our innovative
+              disease detector. This feature allows farmers to upload images of
+              their crops and receive instant, accurate diagnoses of potential
+              diseases, along with expert advice on treatment and prevention,
+              ensuring healthy and thriving crops.
             </p>
           </div>
           <div className="feature-card">
             <i className="fas fa-recycle"></i>
-            <h2>Recycle</h2>
+            <h2>News</h2>
             <p>
-              We work with local recycling facilities to ensure that materials
-              are properly recycled and diverted from landfills.
+              Stay informed with the latest agricultural trends, insights, and
+              news. Our curated news section provides farmers with real-time
+              updates and articles from reputable sources, offering knowledge
+              and information essential for making informed and strategic
+              farming decisions.
             </p>
           </div>
         </div>
