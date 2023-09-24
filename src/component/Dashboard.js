@@ -23,9 +23,7 @@ function Dashboard() {
     const longitude = markerPosition[1];
 
     const apiName = "predict";
-    const apiUrl = `https://127.0.0.1:5000/${apiName}?latitude=${latitude}&longitude=${longitude}`;
-    console.log("changed");
-    console.log("API URL:", apiUrl);
+    const apiUrl = `http://127.0.0.1:5000/${apiName}?latitude=${latitude}&longitude=${longitude}`;
 
     fetch(apiUrl)
       .then((response) => response.json())
@@ -41,6 +39,58 @@ function Dashboard() {
     // Automatically call the API when the component mounts
     callApiWithLatLong();
   }, []);
+
+  const renderCropInformation = () => {
+    if (apiResponse && apiResponse.cropSpecific) {
+      return Object.entries(apiResponse.cropSpecific).map(([crop, info]) => (
+        <div key={crop}>
+          <h2>{crop}</h2>
+          <ol>
+            {info.split("\n").map((step, index) => (
+              <li key={index}>{step}</li>
+            ))}
+          </ol>
+        </div>
+      ));
+    } else {
+      return <p>No crop data available.</p>;
+    }
+  };
+
+  const renderRotationTable = () => {
+    if (apiResponse && apiResponse.rotationTxt) {
+      const rotationData = apiResponse.rotationTxt.split("\n");
+      return (
+        <table>
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Spring</th>
+              <th>Summer</th>
+              <th>Fall</th>
+              <th>Winter</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rotationData.map((rowData, index) => {
+              const [year, spring, summer, fall, winter] = rowData.split(",");
+              return (
+                <tr key={index}>
+                  <td>{year}</td>
+                  <td>{spring}</td>
+                  <td>{summer}</td>
+                  <td>{fall}</td>
+                  <td>{winter}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      );
+    } else {
+      return <p>No rotation information available.</p>;
+    }
+  };
 
   return (
     <div className="page">
@@ -73,25 +123,6 @@ function Dashboard() {
           </MapContainer>
         </div>
         <div className="results">
-          {apiResponse ? (
-            <div>
-              <h2>Crop-Specific Information</h2>
-              <ul>
-                {Object.entries(apiResponse.cropSpecific).map(
-                  ([crop, info]) => (
-                    <li key={crop}>
-                      <h3>{crop}</h3>
-                      <p>{info}</p>
-                    </li>
-                  )
-                )}
-              </ul>
-              <h2>Rotation Information</h2>
-              <p>{apiResponse.rotationTxt}</p>
-            </div>
-          ) : (
-            <p>No data available. Click "Submit" to fetch data.</p>
-          )}
           <div>
             <p>Latitude: {currentLatitude}</p>
             <p>Longitude: {currentLongitude}</p>
@@ -99,6 +130,8 @@ function Dashboard() {
           <button className="buttons" onClick={callApiWithLatLong}>
             Submit
           </button>
+          {renderCropInformation()}
+          {renderRotationTable()}
         </div>
       </section>
     </div>

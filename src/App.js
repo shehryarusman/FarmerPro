@@ -22,7 +22,7 @@ function App() {
         <Route path="FarmerPro/dashboard" element={<Dashboard />} />
         <Route path="FarmerPro/about" element={<About />} />
         <Route path="FarmerPro/news" element={<News />} />
-        <Route path="FarmerPro/home" element={<MainPage />} />
+        <Route path="FarmerPro/" element={<MainPage />} />
         <Route path="FarmerPro/product" element={<ProductRecomendation />} />
         <Route path="FarmerPro/detect" element={<DiseaseClassifier />} />
         <Route path="*" element={<ErrorPage />} />
