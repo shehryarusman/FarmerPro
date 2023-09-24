@@ -98,6 +98,11 @@ function DiseaseClassifier() {
      
       // Handle the response from the server
       console.log('Response:', response.data);
+      let class_type = response.data.class
+      let value = Math.round((response.data.percentage*100) * 100) / 100
+
+      document.getElementById("Class_Out").innerText = class_type + ": " + value + "%";
+
     } catch (error) {
       // Handle errors in making the request or processing the response
       console.error('Error:', error);
@@ -120,6 +125,7 @@ function DiseaseClassifier() {
         <input onChange={(e) => {setimageUpload(e.target.files[0])}} type="file"/>
         <button onClick={handleUpload}>Upload File</button>
         <button onClick={triggerModelDetection}>Classify Vegetable</button>
+        <div id="Class_Out"></div>
       </header>
     </div>
   );
