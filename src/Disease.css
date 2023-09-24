@@ -70,3 +70,32 @@
     font-weight: bold;
     margin-top: 10px;
 }
+
+.render-crop {
+    text-decoration: none;
+}
+
+.crop-info-box {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.crop-info-box h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.render-crop {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+.render-crop li {
+    margin: 5px 0;
+}

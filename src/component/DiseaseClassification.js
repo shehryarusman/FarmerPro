@@ -99,15 +99,14 @@ function DiseaseClassifier() {
 
       // Make a POST request using the fetch API
       fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.class, data.percentage)
-        setApiResponse(data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-      
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.class, data.percentage);
+          setApiResponse(data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     } catch (error) {
       // Handle errors in making the request or processing the response
       console.error("Error:", error);
@@ -117,13 +116,18 @@ function DiseaseClassifier() {
   const renderCropInformation = () => {
     if (apiResponse && apiResponse.class && apiResponse.percentage) {
       return (
-          <ul>
-            <li>Class: {apiResponse.class}</li>            
-            <li>Percentage: {Math.round(apiResponse.percentage * 100 * 100) / 100}</li>           
+        <div className="crop-info-box">
+          <h2>Crop Information</h2>
+          <ul className="render-crop">
+            <li>Class: {apiResponse.class}</li>
+            <li>
+              Percentage: {Math.round(apiResponse.percentage * 100 * 100) / 100}
+            </li>
           </ul>
-            );
+        </div>
+      );
+    }
   };
-}
   useEffect(() => {
     getVideo();
   }, [videoRef]);
@@ -148,20 +152,21 @@ function DiseaseClassifier() {
           </button>
         </div>
 
-        <input
-          onChange={(e) => {
-            setImageUpload(e.target.files[0]);
-          }}
-          type="file"
-          className="file-input"
-        />
-        <button className="button-primary" onClick={handleUpload}>
-          Upload File
-        </button>
-
-        <button className="button-primary" onClick={triggerModelDetection}>
-          Classify Vegetable
-        </button>
+        <div className="horizontal-layout">
+          <input
+            onChange={(e) => {
+              setImageUpload(e.target.files[0]);
+            }}
+            type="file"
+            className="file-input"
+          />
+          <button onClick={handleUpload} className="button-primary">
+            Upload File
+          </button>
+          <button onClick={triggerModelDetection} className="button-primary">
+            Classify Vegetable
+          </button>
+        </div>
         {renderCropInformation()}
       </header>
     </div>
