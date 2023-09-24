@@ -9,6 +9,7 @@ function DiseaseClassifier() {
 
   const [hasPhoto, setHasPhoto] = useState(false);
   const [imageUpload, setImageUpload] = useState(null);
+  const [apiResponse, setApiResponse] = useState(null);
 
   const getVideo = () => {
     navigator.mediaDevices
@@ -148,7 +149,7 @@ function DiseaseClassifier() {
 
         <input
           onChange={(e) => {
-            setimageUpload(e.target.files[0]);
+            setImageUpload(e.target.files[0]);
           }}
           type="file"
           className="file-input"
@@ -161,9 +162,6 @@ function DiseaseClassifier() {
           Classify Vegetable
         </button>
         <div id="Class_Out" className="class-output">
-          <p>Class: {apiResponse.class}</p>
-          <p>Percentage: {Math.round(apiResponse.percentage * 100 * 100) / 100}</p>
-          
         </div>
 
         <div id="Class_Out" className="class-output"></div>
