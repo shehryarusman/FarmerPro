@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/FarmerPro/static/css/main.8a092eb1.css",
-    "main.js": "/FarmerPro/static/js/main.b83572eb.js",
+    "main.js": "/FarmerPro/static/js/main.851abe0f.js",
     "static/js/787.749fe3bb.chunk.js": "/FarmerPro/static/js/787.749fe3bb.chunk.js",
     "static/media/vid2.mp4": "/FarmerPro/static/media/vid2.147f29613bd5e3b6e5fc.mp4",
     "static/media/newsbg.mp4": "/FarmerPro/static/media/newsbg.2e1a38acb51185865e0c.mp4",
@@ -12,11 +12,11 @@
     "static/media/enviromental_image_contact2.jpeg": "/FarmerPro/static/media/enviromental_image_contact2.461a1fd4ca59b65238a0.jpeg",
     "index.html": "/FarmerPro/index.html",
     "main.8a092eb1.css.map": "/FarmerPro/static/css/main.8a092eb1.css.map",
-    "main.b83572eb.js.map": "/FarmerPro/static/js/main.b83572eb.js.map",
+    "main.851abe0f.js.map": "/FarmerPro/static/js/main.851abe0f.js.map",
     "787.749fe3bb.chunk.js.map": "/FarmerPro/static/js/787.749fe3bb.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8a092eb1.css",
-    "static/js/main.b83572eb.js"
+    "static/js/main.851abe0f.js"
   ]
 }

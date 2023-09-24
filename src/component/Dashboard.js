@@ -23,6 +23,7 @@ function Dashboard() {
 
     const apiName = "predict";
     const apiUrl = `https://127.0.0.1:5000/${apiName}?latitude=${latitude}&longitude=${longitude}`;
+    console.log("changed")
     console.log("API URL:", apiUrl);
 
     fetch(apiUrl)
