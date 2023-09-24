@@ -6,7 +6,7 @@ import os
 def predict_crop(temperature, humidity, ph, rainfall):
     file = "finalized_model.sav"
     directory = "backend"
-    filename = file#os.path.join(directory, file)
+    filename = os.path.join(directory, file)
     clf = pickle.load(open(filename, 'rb'))
     # Real life predictions
     answer = (clf.predict(np.array([temperature, humidity, ph, rainfall]).reshape(1, -1)))

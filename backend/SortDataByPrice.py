@@ -8,7 +8,7 @@ def control(lat, long, commodities):
     file = "Produce_location_prices.csv"
     directory = "backend"
     package = "data"
-    filepath = os.path.join(package, file)
+    filepath = os.path.join(directory, package, file)
     print(filepath)
     df = pd.read_csv(filepath)
     
