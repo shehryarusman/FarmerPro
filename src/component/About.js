@@ -1,6 +1,9 @@
 import React from "react";
 import "../About.css";
 import Mustafa from "../mustafa.jpg";
+import Alex from "../alex.jpg";
+import Sherry from "../sherry.jpeg";
+import Vatsal from "../vatsal.JPG";
 
 function About() {
   return (
@@ -12,7 +15,7 @@ function About() {
             <h1>Alex Zavalny</h1>
             <p>Backend Engineer</p>
           </div>
-          <img src={Mustafa} alt="Profile Picture" />
+          <img src={Alex} alt="Profile Picture" />
           <div className="description">
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu
@@ -48,7 +51,7 @@ function About() {
             <h1>Shehryar Usman</h1>
             <p>Backend Engineer</p>
           </div>
-          <img src={Mustafa} alt="Profile Picture" />
+          <img className="sherry" src={Sherry} alt="Profile Picture" />
           <div className="description">
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu
@@ -66,7 +69,7 @@ function About() {
             <h1>Vatsal Jain</h1>
             <p>Frontend Engineer</p>
           </div>
-          <img src={Mustafa} alt="Profile Picture" />
+          <img src={Vatsal} alt="Profile Picture" />
           <div className="description">
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu

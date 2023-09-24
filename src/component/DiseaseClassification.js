@@ -8,7 +8,7 @@ function DiseaseClassifier() {
   const photoRef = useRef(null); //canvas
 
   const [hasPhoto, setHasPhoto] = useState(false);
-  const [apiResponse, setApiResponse] = useState(null);
+  const [imageUpload, setImageUpload] = useState(null);
 
   const getVideo = () => {
     navigator.mediaDevices
@@ -81,8 +81,6 @@ function DiseaseClassifier() {
     getVideo();
   }, [videoRef]);
 
-  const [imageUpload, setimageUpload] = useState(null);
-
   const handleUpload = () => {
     if (imageUpload == null) return;
     const imageRef = ref(storage, `images/${imageUpload.name}`);
@@ -95,68 +93,69 @@ function DiseaseClassifier() {
     try {
       // Define the URL of your Flask server
       const url = "https://127.0.0.1:5000/api/classifyDisease";
-  
+
       const apiUrl = `${url}?runmodel=True`;
-  
+
       // Make a POST request using the fetch API
       fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("hi")
-        console.log("data", data)
-        setApiResponse(data);
-        // Handle the response from the server
-        console.log("Response:", data);
-        
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("hi");
+          console.log("data", data);
+          setApiResponse(data);
+          // Handle the response from the server
+          console.log("Response:", data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     } catch (error) {
       // Handle errors in making the request or processing the response
       console.error("Error:", error);
     }
   };
 
+  useEffect(() => {
+    getVideo();
+  }, [videoRef]);
+
   return (
     <div className="disease-classifier-container">
       <header className="disease-classifier-header">
         <div className="camera-container">
-          <video className="video-display" ref={videoRef}></video>
-          <button className="button-primary" onClick={takePhoto}>
+          <video ref={videoRef} className="video-display"></video>
+          <button onClick={takePhoto} className="button-primary">
             Take Picture
           </button>
         </div>
 
         <div className={"result-container" + (hasPhoto ? " hasPhoto" : "")}>
-          <canvas className="canvas-display" ref={photoRef}></canvas>
-          <button className="button-primary" onClick={uploadPhoto}>
+          <canvas ref={photoRef} className="photo-display"></canvas>
+          <button onClick={uploadPhoto} className="button-primary">
             Upload Photo
           </button>
-          <button className="button-primary" onClick={closePhoto}>
+          <button onClick={closePhoto} className="button-primary">
             Close
           </button>
         </div>
 
-        <input
-          onChange={(e) => {
-            setimageUpload(e.target.files[0]);
-          }}
-          type="file"
-          className="file-input"
-        />
-        <button className="button-primary" onClick={handleUpload}>
-          Upload File
-        </button>
-
-        <button className="button-primary" onClick={triggerModelDetection}>
-          Classify Vegetable
-        </button>
-        <div id="Class_Out" className="class-output">
-          <p>Class: {apiResponse.class}</p>
-          <p>Percentage: {Math.round(apiResponse.percentage * 100 * 100) / 100}</p>
-          
+        <div className="horizontal-layout">
+          <input
+            onChange={(e) => {
+              setImageUpload(e.target.files[0]);
+            }}
+            type="file"
+            className="file-input"
+          />
+          <button onClick={handleUpload} className="button-primary">
+            Upload File
+          </button>
+          <button onClick={triggerModelDetection} className="button-primary">
+            Classify Vegetable
+          </button>
         </div>
+
+        <div id="Class_Out" className="class-output"></div>
       </header>
     </div>
   );
