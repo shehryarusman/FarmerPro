@@ -54,12 +54,18 @@ function Dashboard() {
 
   const renderRotationTable = () => {
     if (apiResponse && apiResponse.rotationTxt) {
-      const rotationData = apiResponse.rotationTxt
-      console.log("rotationData", rotationData)
+      const rotationData = apiResponse.rotationTxt;
+      console.log("rotationData", rotationData);
       const myArray = rotationData.split(/[,\n]+/);
-      console.log("myArray", myArray)
+      console.log("myArray", myArray);
 
-      
+      return (
+            <ul>
+              {myArray.map((item, index) => (
+                <li key={index}>{item.trim()}</li>
+              ))}
+            </ul>
+      );
     } else {
       return <p>No rotation information available.</p>;
     }
