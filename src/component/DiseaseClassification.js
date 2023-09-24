@@ -115,13 +115,15 @@ function DiseaseClassifier() {
   };
 
   const renderCropInformation = () => {
-    return (
-        <ul>
-          <li>Class: {apiResponse.class}</li>            
-          <li>Percentage: {Math.round(apiResponse.percentage * 100 * 100) / 100}</li>           
-        </ul>
-          );
+    if (apiResponse && apiResponse.class && apiResponse.percentage) {
+      return (
+          <ul>
+            <li>Class: {apiResponse.class}</li>            
+            <li>Percentage: {Math.round(apiResponse.percentage * 100 * 100) / 100}</li>           
+          </ul>
+            );
   };
+}
   useEffect(() => {
     getVideo();
   }, [videoRef]);
