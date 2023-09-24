@@ -18,13 +18,12 @@ function About() {
           <img src={Alex} alt="Profile Picture" />
           <div className="description">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu
-              fermentum nunc, nec faucibus elit. Vestibulum quis massa ac ante
-              finibus pretium ut a nisl. Cras quis rutrum lacus. Pellentesque
-              nec finibus nulla, nec luctus leo. Vestibulum aliquet tincidunt
-              purus eget consequat. Nullam faucibus malesuada purus, in mollis
-              erat rutrum quis. In aliquam, velit id condimentum varius, risus
-              magna mattis nisl, vel pharetra mauris lectus et leo.
+              Alex took charge of the backend development for our hackathon
+              project. They designed and implemented the Flask-based API that
+              serves as the backbone of our application. BED1 ensured smooth
+              data management, authentication, and secured API endpoints. They
+              also handled database interactions and worked on overall
+              infrastructure setup.
             </p>
           </div>
         </div>
@@ -36,13 +35,11 @@ function About() {
           <img src={Mustafa} alt="Profile Picture" />
           <div className="description">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu
-              fermentum nunc, nec faucibus elit. Vestibulum quis massa ac ante
-              finibus pretium ut a nisl. Cras quis rutrum lacus. Pellentesque
-              nec finibus nulla, nec luctus leo. Vestibulum aliquet tincidunt
-              purus eget consequat. Nullam faucibus malesuada purus, in mollis
-              erat rutrum quis. In aliquam, velit id condimentum varius, risus
-              magna mattis nisl, vel pharetra mauris lectus et leo.
+              Mustafa focused on the frontend architecture of our hackathon
+              project. They meticulously organized and optimized the frontend
+              codebase, making it easy to maintain and enhancing its
+              performance. FED2 also collaborated closely with the design team
+              to translate creative concepts into interactive user interfaces.
             </p>
           </div>
         </div>
@@ -54,13 +51,12 @@ function About() {
           <img className="sherry" src={Sherry} alt="Profile Picture" />
           <div className="description">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu
-              fermentum nunc, nec faucibus elit. Vestibulum quis massa ac ante
-              finibus pretium ut a nisl. Cras quis rutrum lacus. Pellentesque
-              nec finibus nulla, nec luctus leo. Vestibulum aliquet tincidunt
-              purus eget consequat. Nullam faucibus malesuada purus, in mollis
-              erat rutrum quis. In aliquam, velit id condimentum varius, risus
-              magna mattis nisl, vel pharetra mauris lectus et leo.
+              Shehryar's expertise was vital in scaling the backend and
+              integrating machine learning components. They focused on
+              optimizing server-side performance, designing robust database
+              schemas, and facilitating the incorporation of machine learning
+              models into our application. BED2 also implemented security
+              measures to protect user data and our API.
             </p>
           </div>
         </div>
@@ -72,13 +68,12 @@ function About() {
           <img src={Vatsal} alt="Profile Picture" />
           <div className="description">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu
-              fermentum nunc, nec faucibus elit. Vestibulum quis massa ac ante
-              finibus pretium ut a nisl. Cras quis rutrum lacus. Pellentesque
-              nec finibus nulla, nec luctus leo. Vestibulum aliquet tincidunt
-              purus eget consequat. Nullam faucibus malesuada purus, in mollis
-              erat rutrum quis. In aliquam, velit id condimentum varius, risus
-              magna mattis nisl, vel pharetra mauris lectus et leo.
+              Vatsal was instrumental in crafting the user interface (UI) of our
+              hackathon project. They skillfully designed and implemented the
+              frontend components using React, ensuring an intuitive and
+              visually appealing user experience. FED1 also played a key role in
+              integrating machine learning features seamlessly into the
+              frontend.
             </p>
           </div>
         </div>
