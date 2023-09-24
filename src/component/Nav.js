@@ -44,7 +44,7 @@ function Nav() {
           </ul>
         </div>
         <div className="logo">
-          <Link to="FarmerPro/home">Planter Pro</Link>
+          <Link to="FarmerPro/">Planter Pro</Link>
         </div>
         <div className="menu-right">
           <ul className="menu">

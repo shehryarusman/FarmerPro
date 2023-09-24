@@ -40,50 +40,56 @@ function Dashboard() {
     callApiWithLatLong();
   }, []);
 
-  // Helper function to format steps for each crop
-  const formatCropSteps = (cropData) => {
-    return Object.entries(cropData).map(([crop, info]) => (
-      <div key={crop}>
-        <h2>{crop}</h2>
-        <ol>
-          {info.split("\n").map((step, index) => (
-            <li key={index}>{step}</li>
-          ))}
-        </ol>
-      </div>
-    ));
+  const renderCropInformation = () => {
+    if (apiResponse && apiResponse.cropSpecific) {
+      return Object.entries(apiResponse.cropSpecific).map(([crop, info]) => (
+        <div key={crop}>
+          <h2>{crop}</h2>
+          <ol>
+            {info.split("\n").map((step, index) => (
+              <li key={index}>{step}</li>
+            ))}
+          </ol>
+        </div>
+      ));
+    } else {
+      return <p>No crop data available.</p>;
+    }
   };
 
-  // Helper function to format rotation information into a table
-  const formatRotationTable = (rotationData) => {
-    const years = rotationData.split("\n").filter((line) => line.trim() !== "");
-    const seasons = ["Spring", "Summer", "Fall", "Winter"];
-
-    return (
-      <table>
-        <thead>
-          <tr>
-            <th>Year</th>
-            {seasons.map((season) => (
-              <th key={season}>{season}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {years.map((year, index) => (
-            <tr key={index}>
-              <td>{year.split(",")[0]}</td>
-              {year
-                .split(",")
-                .slice(1)
-                .map((crop, cropIndex) => (
-                  <td key={cropIndex}>{crop}</td>
-                ))}
+  const renderRotationTable = () => {
+    if (apiResponse && apiResponse.rotationTxt) {
+      const rotationData = apiResponse.rotationTxt.split("\n");
+      return (
+        <table>
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Spring</th>
+              <th>Summer</th>
+              <th>Fall</th>
+              <th>Winter</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    );
+          </thead>
+          <tbody>
+            {rotationData.map((rowData, index) => {
+              const [year, spring, summer, fall, winter] = rowData.split(",");
+              return (
+                <tr key={index}>
+                  <td>{year}</td>
+                  <td>{spring}</td>
+                  <td>{summer}</td>
+                  <td>{fall}</td>
+                  <td>{winter}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      );
+    } else {
+      return <p>No rotation information available.</p>;
+    }
   };
 
   return (
@@ -117,16 +123,6 @@ function Dashboard() {
           </MapContainer>
         </div>
         <div className="results">
-          {apiResponse ? (
-            <div>
-              <h2>Crop-Specific Information</h2>
-              {formatCropSteps(apiResponse.cropSpecific)}
-              <h2>Rotation Information</h2>
-              {formatRotationTable(apiResponse.rotationTxt)}
-            </div>
-          ) : (
-            <p>No data available. Click "Submit" to fetch data.</p>
-          )}
           <div>
             <p>Latitude: {currentLatitude}</p>
             <p>Longitude: {currentLongitude}</p>
@@ -134,6 +130,8 @@ function Dashboard() {
           <button className="buttons" onClick={callApiWithLatLong}>
             Submit
           </button>
+          {renderCropInformation()}
+          {renderRotationTable()}
         </div>
       </section>
     </div>

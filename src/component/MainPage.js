@@ -179,7 +179,7 @@ function Home() {
                 <textarea id="message" name="message" required></textarea>
               </div>
               <div className="form-group">
-                <button type="submit" className="btn-submit">
+                <button type="submit" className="buttons">
                   Send Message
                 </button>
               </div>
