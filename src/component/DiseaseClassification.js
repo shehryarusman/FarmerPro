@@ -167,8 +167,8 @@ function DiseaseClassifier() {
             Classify Vegetable
           </button>
         </div>
-        {renderCropInformation()}
       </header>
+      {renderCropInformation()}
     </div>
   );
 }

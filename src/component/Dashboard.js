@@ -29,8 +29,6 @@ function Dashboard() {
       .then((response) => response.json())
       .then((data) => {
         setApiResponse(data);
-        console.log("hi")
-        console.log(apiResponse);
       })
       .catch((error) => {
         console.error("Error:", error);
