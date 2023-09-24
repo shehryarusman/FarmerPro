@@ -41,3 +41,34 @@
     background-color: #27865d !important;
     transition: .4s ease;
 }
+
+/* Add this CSS to your Dashboard.css */
+
+.crop-info-container {
+    max-height: 300px;
+    /* Set the maximum height for in-container scrolling */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+}
+
+.crop-info {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.rotation-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.rotation-table th,
+.rotation-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
+
+/* Add more CSS styles as needed */

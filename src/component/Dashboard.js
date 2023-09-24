@@ -40,58 +40,6 @@ function Dashboard() {
     callApiWithLatLong();
   }, []);
 
-  const renderCropInformation = () => {
-    if (apiResponse && apiResponse.cropSpecific) {
-      return Object.entries(apiResponse.cropSpecific).map(([crop, info]) => (
-        <div key={crop}>
-          <h2>{crop}</h2>
-          <ol>
-            {info.split("\n").map((step, index) => (
-              <li key={index}>{step}</li>
-            ))}
-          </ol>
-        </div>
-      ));
-    } else {
-      return <p>No crop data available.</p>;
-    }
-  };
-
-  const renderRotationTable = () => {
-    if (apiResponse && apiResponse.rotationTxt) {
-      const rotationData = apiResponse.rotationTxt.split("\n");
-      return (
-        <table>
-          <thead>
-            <tr>
-              <th>Year</th>
-              <th>Spring</th>
-              <th>Summer</th>
-              <th>Fall</th>
-              <th>Winter</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rotationData.map((rowData, index) => {
-              const [year, spring, summer, fall, winter] = rowData.split(",");
-              return (
-                <tr key={index}>
-                  <td>{year}</td>
-                  <td>{spring}</td>
-                  <td>{summer}</td>
-                  <td>{fall}</td>
-                  <td>{winter}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      );
-    } else {
-      return <p>No rotation information available.</p>;
-    }
-  };
-
   return (
     <div className="page">
       <h1 className="heading">Soil Detector</h1>
@@ -123,15 +71,39 @@ function Dashboard() {
           </MapContainer>
         </div>
         <div className="results">
-          <div>
-            <p>Latitude: {currentLatitude}</p>
-            <p>Longitude: {currentLongitude}</p>
-          </div>
+          {apiResponse ? (
+            <div>
+              <h2>Crop-Specific Information</h2>
+              <div className="crop-info-container">
+                {Object.entries(apiResponse.cropSpecific).map(
+                  ([crop, info]) => (
+                    <div key={crop} className="crop-info">
+                      <h3>{crop}</h3>
+                      <p>{info}</p>
+                    </div>
+                  )
+                )}
+              </div>
+              <h2>Rotation Information</h2>
+              <table className="rotation-table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Spring</th>
+                    <th>Summer</th>
+                    <th>Fall</th>
+                    <th>Winter</th>
+                  </tr>
+                </thead>
+                <tbody>{/* Populate table rows and columns here */}</tbody>
+              </table>
+            </div>
+          ) : (
+            <p>No data available. Click "Submit" to fetch data.</p>
+          )}
           <button className="buttons" onClick={callApiWithLatLong}>
             Submit
           </button>
-          {renderCropInformation()}
-          {renderRotationTable()}
         </div>
       </section>
     </div>
