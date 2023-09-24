@@ -105,6 +105,12 @@ function DiseaseClassifier() {
         setApiResponse(data);
         // Handle the response from the server
         console.log("Response:", data);
+        return (
+          <ul>
+            <li>Class: {data.class}</li>
+            <li>Percentage: {Math.round(data.percentage * 100 * 100) / 100}</li>
+          </ul>
+    );
         
       })
       .catch((error) => {
