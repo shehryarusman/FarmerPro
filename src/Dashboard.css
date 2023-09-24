@@ -10,15 +10,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0 2rem;
 }
 
 .map {
-    width: 65%;
-    height: 70vh;
+    flex: 1;
+    /* Take up all available horizontal space */
     border: 1px solid black;
     border-radius: 10px;
     padding: 10px;
     margin-right: 2rem;
+    height: 690px;
 }
 
 .results {
@@ -27,4 +29,15 @@
     border: 1px solid black;
     padding: 10px;
     border-radius: 10px;
+}
+
+.buttons {
+    background-color: #154631 !important;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.buttons:hover {
+    background-color: #27865d !important;
+    transition: .4s ease;
 }

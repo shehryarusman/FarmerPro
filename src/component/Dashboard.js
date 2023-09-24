@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "../Dashboard.css";
@@ -6,54 +6,56 @@ import markerIconPng from "leaflet/dist/images/marker-icon.png";
 import { Icon } from "leaflet";
 
 function Dashboard() {
-  // State to manage marker position
   const [markerPosition, setMarkerPosition] = useState([39.9566, -75.1899]);
+  const [apiResponse, setApiResponse] = useState(null);
+  const [currentLatitude, setCurrentLatitude] = useState(markerPosition[0]);
+  const [currentLongitude, setCurrentLongitude] = useState(markerPosition[1]);
 
-  // Function to handle marker move
   const handleMarkerMove = (e) => {
     const { lat, lng } = e.target.getLatLng();
+    setCurrentLatitude(lat);
+    setCurrentLongitude(lng);
     setMarkerPosition([lat, lng]);
-    console.log("Latitude:", lat);
-    console.log("Longitude:", lng);
   };
-  // Function to call the API with latitude and longitude data
+
   const callApiWithLatLong = () => {
     const latitude = markerPosition[0];
     const longitude = markerPosition[1];
 
     const apiName = "predict";
     const apiUrl = `https://127.0.0.1:5000/${apiName}?latitude=${latitude}&longitude=${longitude}`;
-    console.log("changed")
+    console.log("changed");
     console.log("API URL:", apiUrl);
 
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        console.log("API Response:", data);
-        console.log("success!");
+        setApiResponse(data);
       })
       .catch((error) => {
-        // Handle error
         console.error("Error:", error);
       });
   };
 
+  useEffect(() => {
+    // Automatically call the API when the component mounts
+    callApiWithLatLong();
+  }, []);
+
   return (
-    <div>
+    <div className="page">
       <h1 className="heading">Soil Detector</h1>
       <section className="dashboard">
         <div className="map">
           <MapContainer
             center={markerPosition}
             zoom={20}
-            style={{ height: "400px", width: "100%" }}
+            style={{ height: "100%", width: "100%" }}
           >
-            {/* Add a tile layer for the base map */}
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
-            {/* Display the draggable marker with the default Leaflet icon */}
             <Marker
               position={markerPosition}
               draggable={true}
@@ -71,15 +73,32 @@ function Dashboard() {
           </MapContainer>
         </div>
         <div className="results">
-          <p>Plant</p>
-          <p>pH</p>
-          <p>Blah</p>
-          <p>Blah</p>
+          {apiResponse ? (
+            <div>
+              <h2>Crop-Specific Information</h2>
+              <ul>
+                {Object.entries(apiResponse.cropSpecific).map(
+                  ([crop, info]) => (
+                    <li key={crop}>
+                      <h3>{crop}</h3>
+                      <p>{info}</p>
+                    </li>
+                  )
+                )}
+              </ul>
+              <h2>Rotation Information</h2>
+              <p>{apiResponse.rotationTxt}</p>
+            </div>
+          ) : (
+            <p>No data available. Click "Submit" to fetch data.</p>
+          )}
           <div>
-            <p>Latitude: {markerPosition[0]}</p>
-            <p>Longitude: {markerPosition[1]}</p>
+            <p>Latitude: {currentLatitude}</p>
+            <p>Longitude: {currentLongitude}</p>
           </div>
-          <button onClick={callApiWithLatLong}>Submit</button>
+          <button className="buttons" onClick={callApiWithLatLong}>
+            Submit
+          </button>
         </div>
       </section>
     </div>
