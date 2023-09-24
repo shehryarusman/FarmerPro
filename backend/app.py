@@ -16,7 +16,7 @@ from flask_cors import CORS
 
 app = flask.Flask(__name__)
 app.debug = True
-CORS(app, origins=["http://localhost:3000", "https://shehryarusman.github.io/FarmerPro"])
+CORS(app, origins=["http://localhost:3000", "https://shehryarusman.github.io"])
 
 @app.route('/')
 def index():
@@ -69,4 +69,3 @@ if __name__ == '__main__':
     keyName = os.path.join(dirName, 'key.pem')
     context = (certName, keyName)
     app.run(ssl_context=context)
-    
