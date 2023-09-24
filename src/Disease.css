@@ -30,20 +30,6 @@
     height: 300px;
 }
 
-.result-container {
-    display: flex;
-    flex-direction: row;
-    /* Change to row to display the photo beside the webcam */
-    align-items: center;
-    justify-content: center;
-}
-
-.photo-display {
-    width: 300px;
-    /* Adjust the width as needed */
-    height: 300px;
-}
-
 .button-primary {
     margin: 10px;
     padding: 10px 20px;
