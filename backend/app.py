@@ -64,8 +64,6 @@ def predict():
 def pH_of_soil():
     return random.choice(np.arange(4.5, 8.5, 0.007))
 
-def test(a, b):
-    print(a,b)
 def load_model(model_path: str):
     model = tf.saved_model.load(model_path)
     signatures = list(model.signatures.keys())
@@ -95,20 +93,17 @@ def image_pred(file_path: str, model):
     return predicted_health, max(output_data["dense_1"][0]).numpy()
 
 
-@app.route('/api/classifydisease', methods=['GET', 'POST'])
+@app.route('/api/classifyDisease', methods=['GET', 'OPTIONS'])
 def disease_classification():
-    if request.method == "POST":
-        doIClassify = dict(request.json)
-        print(doIClassify["runmodel"])
-        if doIClassify["runmodel"] == True:
-            download_first_image_in_folder( 'images/', 'image.png')
-            time.sleep(0.5) #optional
-            model, signatures = load_model('model')
-            classification, percentage = image_pred('image.png', model)
-            print("model results:", classification, percentage)
-            delete_folder_contents('images/')
-            return {"class":classification, "percentage": str(percentage)}
-        return {"None": 0.0}
+    doIClassify = (request.args.get('runmodel'))
+    if doIClassify:
+        download_first_image_in_folder( 'images/', 'image.png')
+        time.sleep(0.5) #optional
+        model, signatures = load_model('./backend/model')
+        classification, percentage = image_pred('image.png', model)
+        print("model results:", classification, percentage)
+        delete_folder_contents('images/')
+        return {"class":classification, "percentage": str(percentage)}
     return {"None": 0.0}
     
 if __name__ == '__main__':

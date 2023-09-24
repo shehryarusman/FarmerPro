@@ -1,8 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { storage } from "./firebase";
 import { ref, uploadBytes } from "firebase/storage";
-//import {v4} from 'uuid'; //for unpredictable filenames
-import axios from "axios";
 import "../Disease.css";
 
 function DiseaseClassifier() {
@@ -10,6 +8,7 @@ function DiseaseClassifier() {
   const photoRef = useRef(null); //canvas
 
   const [hasPhoto, setHasPhoto] = useState(false);
+  const [apiResponse, setApiResponse] = useState(null);
 
   const getVideo = () => {
     navigator.mediaDevices
@@ -95,23 +94,24 @@ function DiseaseClassifier() {
   const triggerModelDetection = async () => {
     try {
       // Define the URL of your Flask server
-      const url = "http://127.0.0.1:5000/api/classifydisease";
-
-      // Define the data you want to send in your POST request
-      const data = {
-        runmodel: true,
-      };
-
-      // Make a POST request using axios
-      const response = await axios.post(url, data);
-
-      // Handle the response from the server
-      console.log("Response:", response.data);
-      let class_type = response.data.class;
-      let value = Math.round(response.data.percentage * 100 * 100) / 100;
-
-      document.getElementById("Class_Out").innerText =
-        class_type + ": " + value + "%";
+      const url = "https://127.0.0.1:5000/api/classifyDisease";
+  
+      const apiUrl = `${url}?runmodel=True`;
+  
+      // Make a POST request using the fetch API
+      fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("hi")
+        console.log("data", data)
+        setApiResponse(data);
+        // Handle the response from the server
+        console.log("Response:", data);
+        
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
     } catch (error) {
       // Handle errors in making the request or processing the response
       console.error("Error:", error);
@@ -152,7 +152,11 @@ function DiseaseClassifier() {
         <button className="button-primary" onClick={triggerModelDetection}>
           Classify Vegetable
         </button>
-        <div id="Class_Out" className="class-output"></div>
+        <div id="Class_Out" className="class-output">
+          <p>Class: {apiResponse.class}</p>
+          <p>Percentage: {Math.round(apiResponse.percentage * 100 * 100) / 100}</p>
+          
+        </div>
       </header>
     </div>
   );
