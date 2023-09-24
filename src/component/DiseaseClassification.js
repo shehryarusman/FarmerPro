@@ -135,21 +135,23 @@ function DiseaseClassifier() {
   return (
     <div className="disease-classifier-container">
       <header className="disease-classifier-header">
-        <div className="camera-container">
-          <video ref={videoRef} className="video-display"></video>
-          <button onClick={takePhoto} className="button-primary">
-            Take Picture
-          </button>
-        </div>
+        <div className="horizontal-camera">
+          <div className="camera-container">
+            <video ref={videoRef} className="video-display"></video>
+            <button onClick={takePhoto} className="button-primary">
+              Take Picture
+            </button>
+          </div>
 
-        <div className={"result-container" + (hasPhoto ? " hasPhoto" : "")}>
-          <canvas ref={photoRef} className="photo-display"></canvas>
-          <button onClick={uploadPhoto} className="button-primary">
-            Upload Photo
-          </button>
-          <button onClick={closePhoto} className="button-primary">
-            Close
-          </button>
+          <div className={"result-container" + (hasPhoto ? " hasPhoto" : "")}>
+            <canvas ref={photoRef} className="photo-display"></canvas>
+            <button onClick={uploadPhoto} className="button-primary">
+              Upload Photo
+            </button>
+            <button onClick={closePhoto} className="button-primary">
+              Close
+            </button>
+          </div>
         </div>
 
         <div className="horizontal-layout">

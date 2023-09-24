@@ -51,8 +51,14 @@
     align-items: center;
 }
 
+.horizontal-camera {
+    display: flex;
+    flex-direction: row;
+}
+
 .hasPhoto {
     display: flex;
+    margin-left: 1rem;
 }
 
 .canvas-display {
