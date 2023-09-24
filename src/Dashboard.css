@@ -25,7 +25,7 @@
 
 .results {
     width: 20%;
-    height: 40vh;
+    height: 79%;
     border: 1px solid black;
     padding: 10px;
     border-radius: 10px;
@@ -71,4 +71,11 @@
     text-align: center;
 }
 
-/* Add more CSS styles as needed */
+.map-results {
+    max-height: 100%;
+    /* Set your desired maximum height */
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 1rem;
+}

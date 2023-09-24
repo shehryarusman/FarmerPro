@@ -60,11 +60,11 @@ function Dashboard() {
       console.log("myArray", myArray);
 
       return (
-            <ul>
-              {myArray.map((item, index) => (
-                <li key={index}>{item.trim()}</li>
-              ))}
-            </ul>
+        <ul className="render-crop">
+          {myArray.map((item, index) => (
+            <li key={index}>{item.trim()}</li>
+          ))}
+        </ul>
       );
     } else {
       return <p>No rotation information available.</p>;
@@ -109,8 +109,10 @@ function Dashboard() {
           <button className="buttons" onClick={callApiWithLatLong}>
             Submit
           </button>
-          {renderCropInformation()}
-          {renderRotationTable()}
+          <div className="map-results">
+            {renderCropInformation()}
+            {renderRotationTable()}
+          </div>
         </div>
       </section>
     </div>
