@@ -1,10 +1,15 @@
 from RegionClassifier import *
 import pandas as pd
 from statistics import mean
+import os
 
 
 def control(lat, long, commodities):
-    filepath = "data/Produce_location_prices.csv"
+    file = "Produce_location_prices.csv"
+    directory = "backend"
+    package = "data"
+    filepath = os.path.join(directory, package, file)
+    print(filepath)
     df = pd.read_csv(filepath)
     
     region = get_region(lat, long)

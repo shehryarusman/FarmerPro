@@ -13,7 +13,6 @@ nav {
     top: 0;
     width: 100%;
     height: 75px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
 }
@@ -26,9 +25,23 @@ nav .navbar {
     /* Set the width for the navbar */
 }
 
+.nav-item {
+    transition: font-size .3s ease-out;
+}
+
+.nav-item:hover {
+    font-size: 24px;
+}
+
+nav.scrolled {
+    background-color: darkgreen;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
 nav .navbar .logo a {
-    color: #98f594;
-    font-size: 27px;
+    color: #51fc4b;
+    font-size: 34px;
     font-weight: 600;
     text-decoration: none;
 }
@@ -68,8 +81,8 @@ nav .navbar .logo a {
 }
 
 .menu li a {
-    color: #98f594;
-    font-size: 17px;
-    font-weight: 500;
+    color: #67ca67;
+    font-size: 22px;
+    font-weight: 600;
     text-decoration: none;
 }

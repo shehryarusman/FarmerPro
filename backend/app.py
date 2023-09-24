@@ -1,6 +1,6 @@
 import flask
+import os
 from flask import jsonify, request
-import pandas as pd
 import numpy as np
 import random
 import json
@@ -12,60 +12,33 @@ from predict import *
 from SortDataByPrice import *
 from CropRotation import *
 from CropRecommendation import *
-from get_firebase_image import download_first_image_in_folder, delete_folder_contents
 from flask_cors import CORS
-import time
-import tensorflow as tf
 import cv2
+import tensorflow as tf
+import time
+from get_firebase_image import download_first_image_in_folder, delete_folder_contents
 
 app = flask.Flask(__name__)
-CORS(app)
+app.debug = True
+CORS(app, origins=["http://localhost:3000", "https://shehryarusman.github.io"])
 
 @app.route('/')
 def index():
     return {"Hello": "World"}, 200
 
-def func(x):
-    return 27*np.sin(x/43) + 53 + 10*np.sin(x)/5
-
-def expected(x, poverty):
-    if poverty == 0:
-        poverty = 1000
-    return int(func(x)*5*(poverty/24376))
-
-def getDailyTemps(id):
-    f = open("temps.json", "r")
-    temps = json.load(f)
-    #print(temps)
-    return temps[str(id)] 
-
-
 @app.route('/news', methods = ['GET'])
 def get_posts():
-    with open("news.json", "r") as json_file:
+    file = "news.json"
+    directory = "backend"
+    with open(os.path.join(directory, file), "r") as json_file:
         json_data = json.load(json_file)
     return jsonify(json_data)
 
-@app.route('/products/<int:product_id>', methods = ['GET'])
-def get_products(product_id):
-    with open ("records.json", "r") as json_file:
-        json_data = json.load(json_file)
-    for object_name, object_data in json_data.items():
-        if object_data.get('id') == product_id:
-            return "product found"
-    return "product not found"
-
-@app.route('/api/save-canvas', methods=['POST'])
-def save_canvas():
-    data = flask.request.get_json()
-    dataURL = data['dataURL']
-    #print(json.loads(dataURL))
-    return jsonify({'message': 'Canvas saved successfully'})
-    
-    #jsonify({'modelTopology': model_json, 'weightsManifest': weights_manifest})
-
-@app.route('/api/predict', methods=['GET'])
-def predict(lat=33.44193097647909,lang=-112.07110698105588):
+@app.route('/predict', methods=['GET', 'OPTIONS'])
+def predict():
+    lat = float(request.args.get('latitude', 33.44193097647909))
+    lang = float(request.args.get('longitude', -112.07110698105588))
+    print(lat,lang)
     temperature, precipitation = collect_weather(lat, lang)
     Ph =  pH_of_soil()
     humidity = get_humidity(lat, lang)
@@ -89,8 +62,10 @@ def predict(lat=33.44193097647909,lang=-112.07110698105588):
     return output_json
 
 def pH_of_soil():
-    return random.choice(np.arange(4.5, 8.5, 0.007)) 
+    return random.choice(np.arange(4.5, 8.5, 0.007))
 
+def test(a, b):
+    print(a,b)
 def load_model(model_path: str):
     model = tf.saved_model.load(model_path)
     signatures = list(model.signatures.keys())
@@ -137,4 +112,8 @@ def disease_classification():
     return {"None": 0.0}
     
 if __name__ == '__main__':
-    app.run(debug=True)
+    dirName = "backend"
+    certName = os.path.join(dirName, "cert.pem")
+    keyName = os.path.join(dirName, 'key.pem')
+    context = (certName, keyName)
+    app.run(ssl_context=context)

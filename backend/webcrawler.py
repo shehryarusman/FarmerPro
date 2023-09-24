@@ -67,7 +67,7 @@ def newsparser():
         }
         if(ind['sentiment'] == 'positive'):
             news[str(len(news)+1)] = ind
-    with open("news.json", "w") as outfile:
+    with open("./backend/news.json", "w") as outfile:
         json.dump(news, outfile)  
     
 
