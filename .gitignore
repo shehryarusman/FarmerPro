@@ -2,7 +2,8 @@ node_modules/.cache
 node_modules/.bin
 node_modules
 backend/__pycache__
-backend/plant-disease-classifier-4f4c8-firebase-adminsdk-43gkg-d4e7a65974.json
 OpenAiAPIKey.json
 cert.pem
 key.pem
+backend/OpenAiAPIKey.json
+backend/plant-disease-classifier-4f4c8-firebase-adminsdk-43gkg-d4e7a65974.json

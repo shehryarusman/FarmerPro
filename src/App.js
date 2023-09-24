@@ -10,7 +10,7 @@ import Nav from "./component/Nav";
 import News from "./component/Article";
 import ProductRecomendation from "./component/ProductRecomendation";
 import LoginPage from "./component/LoginPage";
-import RecylePage from "./component/RecyclePage";
+import DiseaseClassifier from "./component/DiseaseClassification";
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
         <Route path="FarmerPro/news" element={<News />} />
         <Route path="FarmerPro/" element={<MainPage />} />
         <Route path="FarmerPro/product" element={<ProductRecomendation />} />
-        <Route path="FarmerPro/detect" element={<RecylePage />} />
+        <Route path="FarmerPro/detect" element={<DiseaseClassifier />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
