@@ -90,7 +90,7 @@ function DiseaseClassifier() {
     });
   };
 
-  const triggerModelDetection = async () => {
+  const triggerModelDetection = () => {
     try {
       // Define the URL of your Flask server
       const url = "https://127.0.0.1:5000/api/classifyDisease";
@@ -101,28 +101,27 @@ function DiseaseClassifier() {
       fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        console.log("hi")
-        console.log("data", data)
+        console.log(data.class, data.percentage)
         setApiResponse(data);
-        // Handle the response from the server
-        console.log("Response:", data);
-        return (
-          <ul>
-            <li>Class: {data.class}</li>
-            <li>Percentage: {Math.round(data.percentage * 100 * 100) / 100}</li>
-          </ul>
-    );
-        
       })
       .catch((error) => {
         console.error("Error:", error);
       });
+      
     } catch (error) {
       // Handle errors in making the request or processing the response
       console.error("Error:", error);
     }
   };
 
+  const renderCropInformation = () => {
+    return (
+        <ul>
+          <li>Class: {apiResponse.class}</li>            
+          <li>Percentage: {Math.round(apiResponse.percentage * 100 * 100) / 100}</li>           
+        </ul>
+          );
+  };
   useEffect(() => {
     getVideo();
   }, [videoRef]);
@@ -161,10 +160,7 @@ function DiseaseClassifier() {
         <button className="button-primary" onClick={triggerModelDetection}>
           Classify Vegetable
         </button>
-        <div id="Class_Out" className="class-output">
-        </div>
-
-        <div id="Class_Out" className="class-output"></div>
+        {renderCropInformation()}
       </header>
     </div>
   );
