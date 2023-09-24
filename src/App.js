@@ -10,7 +10,7 @@ import Nav from "./component/Nav";
 import News from "./component/Article";
 import ProductRecomendation from "./component/ProductRecomendation";
 import LoginPage from "./component/LoginPage";
-import DiseaseClassifier from "./component/RecyclePage";
+import DiseaseClassifier from "./component/DiseaseClassification";
 
 function App() {
   return (
