@@ -23,9 +23,7 @@ function Dashboard() {
     const longitude = markerPosition[1];
 
     const apiName = "predict";
-    const apiUrl = `https://127.0.0.1:5000/${apiName}?latitude=${latitude}&longitude=${longitude}`;
-    console.log("changed");
-    console.log("API URL:", apiUrl);
+    const apiUrl = `http://127.0.0.1:5000/${apiName}?latitude=${latitude}&longitude=${longitude}`;
 
     fetch(apiUrl)
       .then((response) => response.json())
@@ -41,6 +39,52 @@ function Dashboard() {
     // Automatically call the API when the component mounts
     callApiWithLatLong();
   }, []);
+
+  // Helper function to format steps for each crop
+  const formatCropSteps = (cropData) => {
+    return Object.entries(cropData).map(([crop, info]) => (
+      <div key={crop}>
+        <h2>{crop}</h2>
+        <ol>
+          {info.split("\n").map((step, index) => (
+            <li key={index}>{step}</li>
+          ))}
+        </ol>
+      </div>
+    ));
+  };
+
+  // Helper function to format rotation information into a table
+  const formatRotationTable = (rotationData) => {
+    const years = rotationData.split("\n").filter((line) => line.trim() !== "");
+    const seasons = ["Spring", "Summer", "Fall", "Winter"];
+
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th>Year</th>
+            {seasons.map((season) => (
+              <th key={season}>{season}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {years.map((year, index) => (
+            <tr key={index}>
+              <td>{year.split(",")[0]}</td>
+              {year
+                .split(",")
+                .slice(1)
+                .map((crop, cropIndex) => (
+                  <td key={cropIndex}>{crop}</td>
+                ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  };
 
   return (
     <div className="page">
@@ -76,18 +120,9 @@ function Dashboard() {
           {apiResponse ? (
             <div>
               <h2>Crop-Specific Information</h2>
-              <ul>
-                {Object.entries(apiResponse.cropSpecific).map(
-                  ([crop, info]) => (
-                    <li key={crop}>
-                      <h3>{crop}</h3>
-                      <p>{info}</p>
-                    </li>
-                  )
-                )}
-              </ul>
+              {formatCropSteps(apiResponse.cropSpecific)}
               <h2>Rotation Information</h2>
-              <p>{apiResponse.rotationTxt}</p>
+              {formatRotationTable(apiResponse.rotationTxt)}
             </div>
           ) : (
             <p>No data available. Click "Submit" to fetch data.</p>
