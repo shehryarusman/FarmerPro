@@ -107,7 +107,12 @@ function DiseaseClassifier() {
         setApiResponse(data);
         // Handle the response from the server
         console.log("Response:", data);
-        
+        return (
+          <ul>
+            <li>Class: {data.class}</li>
+            <li>Percentage: {Math.round(data.percentage * 100 * 100) / 100}</li>
+          </ul>
+    );
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -153,9 +158,6 @@ function DiseaseClassifier() {
           Classify Vegetable
         </button>
         <div id="Class_Out" className="class-output">
-          <p>Class: {apiResponse.class}</p>
-          <p>Percentage: {Math.round(apiResponse.percentage * 100 * 100) / 100}</p>
-          
         </div>
       </header>
     </div>
