@@ -99,24 +99,25 @@ function DiseaseClassifier() {
 
       // Make a POST request using the fetch API
       fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("hi")
-        console.log("data", data)
-        setApiResponse(data);
-        // Handle the response from the server
-        console.log("Response:", data);
-        return (
-          <ul>
-            <li>Class: {data.class}</li>
-            <li>Percentage: {Math.round(data.percentage * 100 * 100) / 100}</li>
-          </ul>
-    );
-        
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("hi");
+          console.log("data", data);
+          setApiResponse(data);
+          // Handle the response from the server
+          console.log("Response:", data);
+          return (
+            <ul>
+              <li>Class: {data.class}</li>
+              <li>
+                Percentage: {Math.round(data.percentage * 100 * 100) / 100}
+              </li>
+            </ul>
+          );
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     } catch (error) {
       // Handle errors in making the request or processing the response
       console.error("Error:", error);
@@ -138,7 +139,7 @@ function DiseaseClassifier() {
         </div>
 
         <div className={"result-container" + (hasPhoto ? " hasPhoto" : "")}>
-          <canvas ref={photoRef} className="photo-display"></canvas>
+          <canvas ref={photoRef} className="canvas-display"></canvas>
           <button onClick={uploadPhoto} className="button-primary">
             Upload Photo
           </button>
@@ -147,21 +148,20 @@ function DiseaseClassifier() {
           </button>
         </div>
 
-        <input
-          onChange={(e) => {
-            setImageUpload(e.target.files[0]);
-          }}
-          type="file"
-          className="file-input"
-        />
-        <button className="button-primary" onClick={handleUpload}>
-          Upload File
-        </button>
-
-        <button className="button-primary" onClick={triggerModelDetection}>
-          Classify Vegetable
-        </button>
-        <div id="Class_Out" className="class-output">
+        <div className="horizontal-layout">
+          <input
+            onChange={(e) => {
+              setImageUpload(e.target.files[0]);
+            }}
+            type="file"
+            className="file-input"
+          />
+          <button onClick={handleUpload} className="button-primary">
+            Upload File
+          </button>
+          <button onClick={triggerModelDetection} className="button-primary">
+            Classify Vegetable
+          </button>
         </div>
 
         <div id="Class_Out" className="class-output"></div>
@@ -169,5 +169,4 @@ function DiseaseClassifier() {
     </div>
   );
 }
-
 export default DiseaseClassifier;
