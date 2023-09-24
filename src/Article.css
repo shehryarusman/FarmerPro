@@ -1,14 +1,15 @@
 .heading {
-  margin-top: 7rem;
+  margin-top: 6rem;
   text-align: center;
   color: #154631;
+  box-shadow: 0px -2px 2px rgba(25, 65, 17, 0.75);
+  padding-top: 2rem;
 }
 
 .articles {
   margin: 1.5rem;
   width: 100%;
   display: grid;
-  z-index: 1;
 }
 
 .article {
@@ -16,20 +17,25 @@
   background-color: white;
   height: auto !important;
   border-radius: 10px;
-  border: 1px solid black;
   display: flex;
-  margin: 1rem auto;
+  margin: 1.7rem auto;
+  box-shadow: 0px 2px 15px rgba(94, 94, 94, 0.144);
 }
 
 .image {
   width: 30%;
-  border-right: 1px solid black;
-  padding: 1rem 1rem;
+  padding: .5rem .5rem;
 }
 
 .image img {
   max-width: 100%;
+  border-radius: 10px;
   max-height: 100%;
+}
+
+.image:hover {
+  padding: 0 0;
+  transition: padding 1s ease;
 }
 
 .content {
@@ -38,17 +44,18 @@
   display: grid;
 }
 
-.article-container {
-  position: relative;
-  overflow: hidden;
+.sentiment {
+  color: green;
+  font-weight: 600;
 }
 
-.newsVid {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vh;
-  height: 100vh;
-  object-fit: cover;
-  z-index: -1;
+.btn {
+  height: 80%;
+  background-color: rgb(241, 252, 244);
+}
+
+.article-link {
+  text-decoration: none;
+  color: #4cca94;
+  font-weight: 600;
 }

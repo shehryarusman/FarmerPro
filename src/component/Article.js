@@ -29,9 +29,6 @@ const Article = () => {
 
   return (
     <div className="article-container">
-      <video muted autoPlay loop playsInline className="newsVid">
-        <source src={NewsVid} type="video/mp4" />
-      </video>
       <h1 className="heading">Recent News</h1>
       <section className="articles">
         {news.map((article) => (
@@ -40,12 +37,18 @@ const Article = () => {
               <img src={article.img} alt="Article" />
             </div>
             <div className="content">
-              <span className="title">{article.title}</span>
+              <span className="title">
+                <strong>{article.title}</strong>
+              </span>
               <span className="text">{article.summary}</span>
-              <span className="author">{article.source}</span>
-              <span className="sentiment">{article.sentiment}</span>
-              <button>
-                <Link to={article.url} target="_blank">
+              <span>
+                Sentiment -{" "}
+                <em>
+                  <span className="sentiment">{article.sentiment}</span>
+                </em>
+              </span>
+              <button className="btn">
+                <Link className="article-link" to={article.url} target="_blank">
                   Read More
                 </Link>
               </button>
