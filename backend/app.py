@@ -16,7 +16,7 @@ from flask_cors import CORS
 
 app = flask.Flask(__name__)
 app.debug = True
-CORS(app, origins=["http://localhost:3000", "https://shehryarusman.github.io/FarmerPro"])
+CORS(app, origins=["http://localhost:3000", "https://shehryarusman.github.io"])
 
 @app.route('/')
 def index():
@@ -58,7 +58,14 @@ def predict():
     return output_json
 
 def pH_of_soil():
-    return random.choice(np.arange(4.5, 8.5, 0.007)) 
+    return random.choice(np.arange(4.5, 8.5, 0.007))
+
+def test(a, b):
+    print(a,b)
 
 if __name__ == '__main__':
-    app.run()
+    dirName = "backend"
+    certName = os.path.join(dirName, "cert.pem")
+    keyName = os.path.join(dirName, 'key.pem')
+    context = (certName, keyName)
+    app.run(ssl_context=context)
